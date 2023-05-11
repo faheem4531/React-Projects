@@ -34,9 +34,17 @@ const AddUser = (props) => {
     setEnterUserAge(event.target.value);
   }
 
+  function errorHander() {
+    setError(null);
+  }
   return (
     <div>
-      {error && <ErrorModal title={error.title} message={error.message} />}
+      {error &&
+        <ErrorModal
+          title={error.title}
+          message={error.message}
+          OnConfirm={errorHander}
+        />}
       <CardWarp className={classes.input}>
         <form onSubmit={addUserHandler}>
           <label htmlFor="username">Username</label>
