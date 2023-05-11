@@ -8,9 +8,9 @@ const Userslist = props => {
     <CardWarp className={classes.users}>
       <ul>
         {props.users.map((user) => (
-          <lil>
+          <li key={props.id}>
             {user.name} ({user.age} years old)
-          </lil>
+          </li>
         ))
         }
       </ul>
