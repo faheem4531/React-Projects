@@ -41,33 +41,37 @@ const Login = (props) => {
     isValid: null,
   });
 
+  const { isValid: emailIsValid } = emailState;
+  const { isValid: passwardIsValid } = passwardState;
 
-  // useEffect(() => {
-  //   const timeHandler = setTimeout(() => {
-  //     setFormIsValid(
-  //       ...
-  //     );
-  //   }, 500);
+  useEffect(() => {
+    const timeHandler = setTimeout(() => {
+      setFormIsValid(
+        emailIsValid && passwardIsValid
+      );
+    }, 500);
 
-  //   return () => {
-  //     clearTimeout(timeHandler);
-  //   };
-  // }, [enteredEmail, enteredPassword])
+    return () => {
+      clearTimeout(timeHandler);
+    };
+  }, [emailIsValid, passwardIsValid]);
+
+
 
   const emailChangeHandler = (event) => {
     dispatchEmail({ type: 'USER_INPUT', val: event.target.value });
 
-    setFormIsValid(
-      event.target.value.includes('@') && passwardState.isValid
-    );
+    // setFormIsValid(
+    //   event.target.value.includes('@') && passwardState.isValid
+    // );
   };
 
   const passwordChangeHandler = (event) => {
     dispatchPassward({ type: 'USER_INPUT', val: event.target.value })
 
-    setFormIsValid(
-      emailState.isValid && event.target.value.trim().length > 6
-    );
+    // setFormIsValid(
+    //   emailState.isValid && event.target.value.trim().length > 6
+    // );
   };
 
   const validateEmailHandler = () => {
