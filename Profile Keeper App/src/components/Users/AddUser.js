@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 
 import CardWarp from "../UI/CardWarp";
 import ErrorModal from "../UI/ErrorModal";
@@ -38,7 +38,7 @@ const AddUser = (props) => {
     setError(null);
   }
   return (
-    <div>
+    <Fragment>
       {error &&
         <ErrorModal
           title={error.title}
@@ -64,7 +64,7 @@ const AddUser = (props) => {
           <Button type="submit">Add User</Button>
         </form>
       </CardWarp>
-    </div>
+    </Fragment>
   )
 }
 
