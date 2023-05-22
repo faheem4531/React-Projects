@@ -1,11 +1,10 @@
-import React, { isValidElement, useRef, useState } from 'react';
-
+import React, { useRef, useState } from 'react';
 
 import classes from './MealItemForm.module.css';
 import Input from '../../UI/Input';
 
 const MealItemForm = props => {
-  const [amountIsValid, setAmountIsValild] = useState(true);
+  const [amountIsValid, setAmountIsValid] = useState(true);
   const amountInputRef = useRef()
 
   function submitHandler(event) {
@@ -15,7 +14,7 @@ const MealItemForm = props => {
     const enteredAmountNumber = +enteredAmount;  // to convert string number into number (change data type)
 
     if (enteredAmount.trim().length === 0 || enteredAmountNumber > 5 || enteredAmountNumber < 1) {
-      setAmountIsValild(false);
+      setAmountIsValid(false);
       return; // if condition unmatch min-max items then return the condition
     }
 
@@ -26,8 +25,8 @@ const MealItemForm = props => {
     <form className={classes.form} onSubmit={submitHandler}>
       <Input
         label="Amount"
+        ref={amountInputRef}
         input={{
-          ref: { amountInputRef },
           id: 'amount_' + props.id,
           type: 'number',
           min: '1',
