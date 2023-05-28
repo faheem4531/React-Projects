@@ -38,6 +38,7 @@ const Cart = props => {
     });
     setIsSubmitting(false);
     setDidSumbit(true);
+    cartCtx.clearCart();
   };
 
   const cartItems = (
