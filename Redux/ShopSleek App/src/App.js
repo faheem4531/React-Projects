@@ -17,6 +17,7 @@ function App() {
   const notification = useSelector(state => state.ui.notification);
   const dispatch = useDispatch();
 
+  // for fetching data when app run initially from the database
   useEffect(() => {
     async function fetchData() {
       const response = await fetch('https://shopsleek-dd462-default-rtdb.firebaseio.com/cart.json');
@@ -26,7 +27,10 @@ function App() {
 
       const cartData = await response.json();
 
-      dispatch(cartActions.replaceCart(cartData));
+      dispatch(cartActions.replaceCart({
+        items: cartData.items || [],
+        totalQuantity: cartData.totalQuantity
+      }));
     }
 
     fetchData().catch(error => {
@@ -38,13 +42,18 @@ function App() {
     });
   }, [dispatch]);
 
-  useEffect(() => {
-    async function sendCartData() {
-      if (isInitial) {
-        isInitial = false;
-        return;
-      }
 
+  // for sending data via 'PUT' while adding and removing cart items
+  useEffect(() => {
+
+    if (isInitial) {
+      isInitial = false;
+      return;
+    }
+    if (!cart.changed) {
+      return
+    }
+    async function sendCartData() {
       dispatch(uiActions.showNotification({
         status: 'pending',
         title: 'Pending...',
@@ -72,7 +81,7 @@ function App() {
         title: 'Error',
         message: 'Sending cart data fail.'
       }));
-    })
+    });
 
   }, [cart, dispatch]);
 
