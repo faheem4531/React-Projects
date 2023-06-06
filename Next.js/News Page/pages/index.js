@@ -1,9 +1,11 @@
-import Head from 'next/head'
 
-export default function Home() {
+
+ function HomePage() {
   return (
    <div>
-    hello  
+   <h1> The Home Page </h1>
    </div>
   )
 }
+
+export default HomePage;
